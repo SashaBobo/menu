@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+<main>
+    <div th:insert="blocks/header :: header"></div>
+
+    <div class="container">
+        <br><br>
+        <p th:text="${message}"></p>
+
+        <form th:action="@{/registration}" method="post">
+            <div>
+                <i class="material-icons prefix">account_circle</i>
+                <label> User Name : <input type="text" name="username" placeholder="User name"/></label>
+            </div>
+            <div>
+                <i class="material-icons prefix">lock</i>
+                <label> Password: <input type="password" name="password" placeholder="Password"/></label>
+            </div>
+            <div>
+                <i class="material-icons prefix">mail</i>
+                <label> Email: <input type="email" name="email" placeholder="Some@some.com"/></label>
+            </div>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/><br>
+            <div><input type="submit" value="Sign up" class="waves-effect waves-light btn blue-grey lighten-3"/></div>
+        </form>
+        <br>
+        <a href="login" class="waves-effect waves-light btn blue-grey lighten-4">
+            <i class="material-icons">arrow_back</i>
+        </a><br><br>
+    </div>
+</main>
+
+<div th:insert="blocks/footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+<main>
+    <div th:insert="blocks/header :: header"></div>
+
+    <div class="container"><br>
+        <div class="row"><br>
+
+            <h6 class="blue-grey-text text-darken-1">Пользователи:</h6><br>
+
+            <div th:each="u:${users}">
+                <div class="col s12">
+                    <div class="row">
+
+                        <div class="col s4">
+                            <label th:text="${u.username}"></label>
+                        </div>
+                        <div class="col s4">
+                            <div th:each="role:${u.roles}">
+                                <label th:text="${role}"></label>
+                            </div>
+                        </div>
+                        <div class="col s4">
+                            <a th:href="@{user/{details}(details=${u.getId()})}"
+                               class="waves-effect waves-light btn-flat white">
+                                <i class="material-icons prefix">edit</i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<div th:insert="blocks/footer :: footer"></div>
+</body>
+</html>

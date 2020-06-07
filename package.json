@@ -1,0 +1,18 @@
+{
+  "name": "menu",
+  "version": "1.0.0",
+  "description": "Menu from the fridge",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SashaBobo/menu.git"
+  },
+  "author": "Aleksandra Borisova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SashaBobo/menu/issues"
+  },
+  "homepage": "https://github.com/SashaBobo/menu#readme"
+}

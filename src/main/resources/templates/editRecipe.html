@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+<main>
+    <div th:insert="blocks/header :: header"></div>
+
+    <div class="container">
+        <div class="row"><br>
+
+            <div class="col s2 m2">
+                <a href="/recipes" class="waves-effect waves-light btn blue-grey lighten-4">
+                    <i class="material-icons">arrow_back</i>
+                </a><br><br><br>
+            </div>
+
+            <div class="col s12 s11 s10 m9">
+                <form method="post" enctype="multipart/form-data">
+                    <input contenteditable="true" th:value="${recipeEdit.title}" name="title" maxlength="254"/><br>
+
+                    <input contenteditable="true" th:value="${recipeEdit.instruction}" name="instruction"
+                           maxlength="4800"/><br>
+
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="col s4">
+                                <h6 class="blue-grey-text text-darken-1">Категория:</h6>
+                                <a class="btn-flat"
+                                   th:text="${recipeEdit.category.nameCategory(recipeEdit.category)}">
+                                </a>
+                            </div>
+                            <div class="menu-wrap col s8">
+                                <ul><h6 class="blue-grey-text text-darken-1">Поменять категорию:</h6>
+                                    <li>
+                                        <a class="btn-small blue-grey lighten-4"><i class="Tiny material-icons prefix">chevron_right</i></a>
+                                        <ul>
+                                            <div class="row">
+                                                <li th:each="category : ${categories}" class="col s6">
+                                                    <a class="btn-flat">
+                                                        <label>
+                                                            <input type="radio" th:id="${category}" name="category"
+                                                                   th:checked="${#lists.contains(categories, category) ? false: true}"
+                                                                   th:text="${category.nameCategory(category)}"
+                                                                   class="radio"/><span></span>
+                                                        </label>
+                                                    </a>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s12">
+                            <h6 class="blue-grey-text text-darken-1">Продуты:</h6>
+                            <div th:unless="${#lists.isEmpty(recipeEdit.getProductsInRecipe())}">
+                                <div th:each="p:${recipeEdit.getProductsInRecipe()}">
+                                    <div th:text="${p.productName}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s12">
+                            <h6 class="blue-grey-text text-darken-1">Изменить список продуктов:</h6>
+                            <div th:each="p:${product}" class="col s5 m5 xl5">
+                                <label>
+                                    <input type="checkbox" th:id="${p.id}" name="product" th:value="${p.id}"
+                                           th:text="${p.productName}"
+                                           th:checked="${#lists.contains(product, p) ? false: true}"
+                                           class="checkbox"/><span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="col s6 m6 xl6">
+                                <h6 class="blue-grey-text text-darken-1">Изменить фотографию</h6>
+                            </div>
+                            <div class="col s6 m6 xl6">
+                                <input type="file" name="file"/>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="waves-effect waves-light btn blue-grey darken-1">Save</button>
+                    <br>
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div th:insert="blocks/footer :: footer"></div>
+</body>
+</html>

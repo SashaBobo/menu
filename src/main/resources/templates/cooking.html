@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+<main>
+    <div th:insert="blocks/header :: header"></div>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col s3 m3 xl3"><br>
+                <form action="/cooking/all" method="post">
+                    <button class="waves-effect waves-light btn blue-grey lighten-4">всё</button>
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                </form>
+
+                <div th:each="category : ${categories}">
+                    <form method="post">
+                        <input type="hidden" th:id="${category}" name="category" th:value="${category}"/>
+                        <button th:text="${category.nameCategory(category)}"
+                                class="waves-effect waves-light btn blue-grey lighten-4"></button>
+                        <input type="hidden" name="user" th:value="${user.id}"/>
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    </form>
+                </div>
+
+                <form method="post">
+                    <button class="waves-effect waves-light btn blue-grey lighten-4">мои рецепты</button>
+                    <input type="hidden" name="user" th:value="${user.id}"/>
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                </form>
+            </div>
+
+            <div class="col s12 s11 s10 m9 m8 m7 m6">
+                <h5 class="blue-grey-text text-darken-1">Что можно приготовить:</h5><br>
+                <div th:each="r:${recipe}">
+                    <div class="row">
+                        <div class="card medium">
+                            <div class="card-image waves-effect waves-block waves-light"
+                                 th:unless="${#lists.isEmpty(r.filename)}">
+                                <img class="activator" th:src="@{img/{details}(details=${r.filename})}"/>
+                            </div>
+                            <div class="card-content">
+                                        <span class="card-title activator blue-grey-text text-darken-4"
+                                              th:text="${r.title}"></span>
+                            </div>
+                            <div class="card-reveal">
+                                        <span class="card-title blue-grey-text text-darken-4"
+                                              th:text="${r.title}"></span>
+                                <p th:text="${r.instruction}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<div th:insert="blocks/footer :: footer"></div>
+</body>
+</html>

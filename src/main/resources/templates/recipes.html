@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+<main>
+    <div th:insert="blocks/header :: header"></div>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col s3 m3 xl3"><br>
+                <form action="/recipes/all" method="post">
+                    <button class="waves-effect waves-light btn blue-grey lighten-4">всё</button>
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                </form>
+
+                <div th:each="category : ${categories}">
+                    <form action="/recipes" method="post">
+                        <input type="hidden" th:id="${category}" name="category" th:value="${category}"/>
+                        <button th:text="${category.nameCategory(category)}"
+                                class="waves-effect waves-light btn blue-grey lighten-4"></button>
+                        <input type="hidden" name="user" th:value="${user.id}"/>
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    </form>
+                </div>
+
+                <form action="/recipes" method="post">
+                    <button class="waves-effect waves-light btn blue-grey lighten-4">мои рецепты</button>
+                    <input type="hidden" name="user" th:value="${user.id}"/>
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                </form>
+                <br><br>
+
+                <label>Найти рецепт:</label>
+                <form method="get" action="/recipes">
+                    <input type="text" name="filter" th:value="${filter}"/>
+                    <button type="submit" class="waves-effect waves-light btn orange accent-3">
+                        <i class="material-icons prefix">search</i>
+                    </button>
+                </form>
+                <br><br>
+                <a href="/newRecipe" class="waves-effect waves-light btn cyan lighten-3">Добавить рецепт</a>
+            </div>
+
+            <div class="col s12 s11 s10 m9 m8 m7 m6"><br>
+                <div class="row">
+
+                    <div th:each="r:${recipe}">
+                        <form action="/recipes/delete" method="post">
+
+                            <div class="col s12">
+                                <div class="card medium">
+                                    <div class="card-image waves-effect waves-block waves-light"
+                                         th:unless="${#lists.isEmpty(r.filename)}">
+                                        <img class="activator" th:src="@{img/{details}(details=${r.filename})}"/>
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title activator blue-grey-text text-darken-4"
+                                              th:text="${r.title}"></span>
+                                        <div class="row">
+                                            <div class="col s7">
+                                                <div class="col s2">
+                                                    <button type="submit" th:if="${user.username == r.authorName}"
+                                                            class="waves-effect waves-light btn-flat">
+                                                        <i class="material-icons prefix white">delete</i>
+                                                    </button>
+                                                    <input type="hidden" name="recipeId" th:value="${r.id}"/>
+                                                </div>
+                                                <div class="col s2">
+                                                    <a th:if="${user.username == r.authorName}"
+                                                       th:href="@{editRecipe/{details}(details=${r.getId()})}"
+                                                       class="waves-effect waves-light btn-flat white">
+                                                        <i class="material-icons prefix">edit</i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-reveal">
+                                        <span class="card-title blue-grey-text text-darken-4"
+                                              th:text="${r.title}"></span>
+                                        <p th:text="${r.instruction}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div th:insert="blocks/footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+nav {
+    background: #eceff1;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+figure {
+    width: 100%;
+    height: 400px;
+    margin: 0;
+}
+
+figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+h5 {
+    position: relative;
+    left: 15px;
+}
+
+.none {
+    display: none;
+}
+
+.position {
+    position: relative;
+    left: 45px;
+    bottom: 26px;
+}
+
+.click {
+    display: none;
+}
+
+.checkbox[type="checkbox"] + span:before {
+    border: none;
+}
+
+.radio[type="radio"] + span:before {
+    border: none;
+}
+
+.page-footer {
+    background: #b0bec5;
+}
+
+.menu-wrap {
+    line-height: 40px;
+    position: relative;
+}
+
+.menu-wrap ul {
+    list-style: none;
+}
+
+.menu-wrap ul li a {
+    float: left;
+    display: block;
+    text-align: left;
+    color: #FFF;
+    text-transform: uppercase;
+}
+
+.menu-wrap ul ul li {
+    width: 150px;
+}
+
+.menu-wrap ul li a:hover {
+    background-color: #eceff1;
+    display: block;
+}
+
+.menu-wrap ul li:hover ul {
+    display: block;
+}
+
+.menu-wrap ul ul {
+    display: none;
+    list-style: none;
+    position: absolute;
+    background-color: #78909c;
+}
+
+.menu-wrap ul ul li a {
+    float: none;
+    display: block;
+    text-align: left;
+}
+
+.menu-wrap ul ul li a:hover {
+    color: #fff;
+}
+
+@media (min-width: 993px) {
+    .min {
+        display: none;
+    }
+}
+
+@media (max-width: 1320px) {
+    .max {
+        display: none;
+    }
+}
+

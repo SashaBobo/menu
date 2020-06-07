@@ -1,0 +1,72 @@
+<div th:fragment="header">
+    <header>
+        <div class="navbar-fixed">
+
+            <nav>
+                <div class="nav-wrapper">
+                    <div class="container">
+
+                        <div class="max">
+                            <div class="brand-logo">Меню из холодильника</div>
+                        </div>
+
+                        <ul class="right hide-on-med-and-down">
+                            <li><a href="/" th:if="${user}">Главная</a></li>
+                            <li><a href="/fridge" th:if="${user}">Холодильник</a></li>
+                            <li><a href="/cooking" th:if="${user}">Кухня</a></li>
+                            <li><a href="/recipes" th:if="${user}">Книга рецептов</a></li>
+                            <li>
+                                <div th:if="${user}" th:switch="${user.username}">
+                                    <a href="/user" th:case="'admin'">Пользователи</a>
+                                </div>
+                            </li>
+                            <li><a href="/user/profile" th:if="${user}">Профиль</a></li>
+                            <li>
+                                <form th:action="@{/logout}" method="post">
+                                    <button class="btn-floating btn-large waves-effect waves-light blue-grey lighten-5">
+                                        <i class="material-icons right">exit_to_app</i>
+                                    </button>
+                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                                </form>
+                            </li>
+                        </ul>
+
+                        <div class="row min">
+                            <div class="col s10">
+                                <div class="menu-wrap">
+                                    <ul>
+                                        <li><a class="brand-logo"><i class="material-icons prefix">menu</i></a>
+                                            <ul>
+                                                <li><a href="/" th:if="${user}">Главная</a></li>
+                                                <li><a href="/fridge" th:if="${user}">Холодильник</a></li>
+                                                <li><a href="/cooking" th:if="${user}">Кухня</a></li>
+                                                <li><a href="/recipes" th:if="${user}">Книга рецептов</a></li>
+                                                <li>
+                                                    <div th:if="${user}" th:switch="${user.username}">
+                                                        <a href="/user" th:case="'admin'">Пользователи</a>
+                                                    </div>
+                                                </li>
+                                                <li><a href="/user/profile" th:if="${user}">Профиль</a></li>
+                                                <li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col s2">
+                                <form th:action="@{/logout}" method="post">
+                                    <button class="btn-floating btn-large waves-effect waves-light blue-grey lighten-5">
+                                        <i class="material-icons right">exit_to_app</i>
+                                    </button>
+                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+</div>

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+<main>
+    <div th:insert="blocks/header :: header"></div>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col s12">
+                <div class="row">
+                    <div class="col s12">
+                        <div class="row">
+                            <div class="col s6">
+                                <h5 class="blue-grey-text text-darken-1">Продукты в холодильнике:</h5><br>
+                            </div>
+                            <div class="col s6">
+                                <div class="position_sticky"><br>
+                                    <a href="/products"
+                                       class="waves-effect waves-light btn cyan lighten-3">Заполнить</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <form action="/fridge" method="post">
+                        <div th:each="p:${products}" class="col s4">
+                            <label>
+                                <a class="waves-effect btn-flat"><i class="material-icons prefix">delete</i></a>
+                                <div th:text="${p.productName}" class="position"></div>
+                                <input type="submit" name="product" class="none" th:value="${p.id}"/>
+                            </label>
+                        </div>
+                        <input type="hidden" name="user" th:value="${user.id}">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div th:insert="blocks/footer :: footer"></div>
+</body>
+</html>
