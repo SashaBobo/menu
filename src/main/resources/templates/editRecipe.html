@@ -39,7 +39,7 @@
                                                 <li th:each="category : ${categories}" class="col s6">
                                                     <a class="btn-flat">
                                                         <label>
-                                                            <input type="radio" th:id="${category}" name="category"
+                                                            <input type="radio" th:id="${category}" th:value="${category}" name="category" 
                                                                    th:checked="${#lists.contains(categories, category) ? false: true}"
                                                                    th:text="${category.nameCategory(category)}"
                                                                    class="radio"/><span></span>
